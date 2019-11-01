@@ -1,6 +1,7 @@
 package kweb
 
 class HelloController {
-
-    def index() { }
+    def index() {
+        render "Hello World!"
+    }
 }
