@@ -1,7 +1,7 @@
 package com.kei
 
-class Main {
+class Comment {
+
     static constraints = {
-        
     }
 }
