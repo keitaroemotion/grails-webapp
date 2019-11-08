@@ -9,10 +9,11 @@ class BlogController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond blogService.list(params), model:[blogCount: blogService.count()]
-    }
+    def scaffold = Blog
+    // def index(Integer max) {
+    //     params.max = Math.min(max ?: 10, 100)
+    //     respond blogService.list(params), model:[blogCount: blogService.count()]
+    // }
 
     def show(Long id) {
         respond blogService.get(id)
@@ -37,7 +38,16 @@ class BlogController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'blog.label', default: 'Blog'), blog.id])
+                flash.message = message(
+                                    code: 'default.created.message',
+                                    args: [
+                                        message(
+                                            code:    'blog.label',
+                                            default: 'Blog'
+                                        ),
+                                        blog.id
+                                    ]
+                                )
                 redirect blog
             }
             '*' { respond blog, [status: CREATED] }
@@ -63,7 +73,16 @@ class BlogController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'blog.label', default: 'Blog'), blog.id])
+                flash.message = message(
+                                    code: 'default.updated.message',
+                                    args: [
+                                        message(
+                                            code:    'blog.label',
+                                            default: 'Blog'
+                                        ),
+                                        blog.id
+                                    ]
+                                )
                 redirect blog
             }
             '*'{ respond blog, [status: OK] }
@@ -80,7 +99,17 @@ class BlogController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'blog.label', default: 'Blog'), id])
+                flash.message = message(
+                                    code: 'default.deleted.message',
+                                    args: [
+                                        message(
+                                            code:   'blog.label',
+                                            default: 'Blog'
+                                        ),
+                                        id
+                                    ]
+                                )
+
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -90,7 +119,16 @@ class BlogController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'blog.label', default: 'Blog'), params.id])
+                flash.message = message(
+                                    code: 'default.not.found.message',
+                                    args: [
+                                        message(
+                                            code:    'blog.label',
+                                            default: 'Blog'
+                                        ),
+                                        params.id
+                                    ]
+                                )
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

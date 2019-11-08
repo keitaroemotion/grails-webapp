@@ -1,7 +1,6 @@
 package kweb
 
 class UrlMappings {
-
     static mappings = {
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

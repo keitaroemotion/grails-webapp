@@ -12,7 +12,7 @@ class Comment {
     }
 
     String toString() {
-        if(comment?.size) > 20) {
+        if (comment?.size() > 20) {
             return comment.substring(0, 20)
         } 
         return comment
